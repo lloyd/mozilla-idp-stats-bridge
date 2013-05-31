@@ -8,7 +8,9 @@ librato = require('librato-metrics'),
 config = require('./lib/config'),
 util = require('util');
 
-var what = [
+var what;
+
+exports.what = what = [
   {
     Namespace: 'MozIDP-staging',
     MetricName: 'mozillaidp.healthcheck.ok',
@@ -32,33 +34,36 @@ var what = [
 ];
 
 
-var client = require('librato-metrics').createClient({
+var client = exports.client = require('librato-metrics').createClient({
   email: config.get('librato.user'),
   token: config.get('librato.token')
 });
 
-var lastReport = null;
+// only run the server if we're invoked from the command line.
+if (require.main === module) {
+  var lastReport = null;
 
-// report every minute
-setInterval(function() {
-  // list all metrics we want
-  cw.list(what, function(err, r) {
-    if (err) return console.error('error:', err);
-    client.post('/metrics', { gauges: r }, function(e, r) {
-      lastReport = new Date();
+  // report every minute
+  setInterval(function() {
+    // list all metrics we want
+    cw.list(what, function(err, r) {
+      if (err) return console.error('error:', err);
+      client.post('/metrics', { gauges: r }, function(e, r) {
+        lastReport = new Date();
+      });
     });
+  }, 60000);
+
+  // start a simple server.
+  var express = require('express');
+  var app = express();
+  app.get('/', function(req, res){
+    var body = "haven't reported stats yet...";
+    if (lastReport) {
+      var body = util.format('last reported stats %ss ago.', ((new Date() - lastReport) / 1000.0).toFixed(1));
+    }
+    res.send(body, 200);
   });
-}, 60000);
 
-// start a simple server.
-var express = require('express');
-var app = express();
-app.get('/', function(req, res){
-  var body = "haven't reported stats yet...";
-  if (lastReport) {
-    var body = util.format('last reported stats %ss ago.', ((new Date() - lastReport) / 1000.0).toFixed(1));
-  }
-  res.send(body, 200);
-});
-
-app.listen(process.env.PORT || 3000);
+  app.listen(process.env.PORT || 3000);
+}
