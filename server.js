@@ -33,8 +33,6 @@ exports.what = what = [
   }
 ];
 
-
-
 // only run the server if we're invoked from the command line.
 if (require.main === module) {
   var lastReport = null;
