@@ -1,0 +1,22 @@
+{
+  "name": "mozilla-idp-monitoring-bridge",
+  "description": "cloudwatch -> librato bridge for mozilla IdP",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "librato-metrics": "~0.0.7",
+    "awssum": "~1.0.0",
+    "awssum-amazon": "1.0.2",
+    "awssum-amazon-cloudwatch": "1.0.1",
+    "JSONSelect": "0.4.0",
+    "convict": "0.2.3",
+    "express": "3.2.5"
+  },
+  "devDependencies": {
+    "awsbox": "0.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "src": "git://github.com/lloyd/librato_bridge"
+  }
+}
