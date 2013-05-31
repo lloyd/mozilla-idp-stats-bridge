@@ -48,7 +48,10 @@ if (require.main === module) {
     // list all metrics we want
     cw.list(what, function(err, r) {
       if (err) return console.error('error:', err);
+      else console.log("debug", JSON.stringify(r));
       client.post('/metrics', { gauges: r }, function(e, r) {
+        if (e) console.error("error pushing to librato", e);
+        else console.log("debug", "pushed to librato");
         lastReport = new Date();
       });
     });
