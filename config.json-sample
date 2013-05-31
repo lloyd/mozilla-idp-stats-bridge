@@ -1,0 +1,10 @@
+{
+  "aws": {
+    "id": "<your aws id>",
+    "secret": "<your aws secret>"
+  },
+  "librato": {
+    "user": "<your librato username>",
+    "token": "<your librato api token>"
+  }
+}
