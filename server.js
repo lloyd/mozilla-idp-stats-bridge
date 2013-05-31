@@ -34,10 +34,6 @@ exports.what = what = [
 ];
 
 
-var client = exports.client = require('librato-metrics').createClient({
-  email: config.get('librato.user'),
-  token: config.get('librato.token')
-});
 
 // only run the server if we're invoked from the command line.
 if (require.main === module) {
@@ -49,7 +45,10 @@ if (require.main === module) {
     cw.list(what, function(err, r) {
       if (err) return console.error('error:', err);
       else console.log("debug", JSON.stringify(r));
-      client.post('/metrics', { gauges: r }, function(e, r) {
+      var client = librato.createClient({
+        email: config.get('librato.user'),
+        token: config.get('librato.token')
+      }).post('/metrics', { gauges: r }, function(e, r) {
         if (e) console.error("error pushing to librato", e);
         else console.log("debug", "pushed to librato");
         lastReport = new Date();
