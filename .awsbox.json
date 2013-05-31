@@ -4,8 +4,5 @@
   ],
   "env": {
     "CONFIG_FILES": "$HOME/config.json"
-  },
-  "hooks": {
-    "postdeploy": "scripts/gen_keys.js"
   }
 }
