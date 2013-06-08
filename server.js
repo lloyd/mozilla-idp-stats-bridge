@@ -12,70 +12,60 @@ var what;
 
 exports.what = what = [
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.healthcheck.ok',
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.healthcheck.error',
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.ldap.auth.success',
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.ldap.auth.wrong_password',
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.ldap.auth.unknown_email',
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.auth.attempt',
     Description: "Auth screen presentation",
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.auth.success',
     Description: "Auth successes",
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.auth.throttle',
     Description: "Auth failures due to throttling",
     type: 'Sum'
   },
   {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     MetricName: 'mozillaidp.provision.attempt',
     Description: "Provisioning Attempts",
     type: 'Sum'
   },
   {
-    Namespace: 'AWS/ELB',
-    MetricName: 'HealthyHostCount',
-    Description: "Healthy Hosts",
-    type: 'Average',
-    Dimensions: [
-      { Name: 'LoadBalancerName', Value: 'MozIDP-Staging' }
-    ]
-  },
-  {
-    Namespace: 'MozIDP-staging',
+    Namespace: config.get('statsNamespace'),
     Description: "total LDAP time in ms",
     MetricName: 'mozillaidp.ldap.timing.total',
     type: 'Average'
-  },
-
+  }
 ];
 
 // only run the server if we're invoked from the command line.

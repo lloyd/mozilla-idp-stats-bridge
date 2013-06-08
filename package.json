@@ -10,7 +10,9 @@
     "awssum-amazon-cloudwatch": "1.0.1",
     "JSONSelect": "0.4.0",
     "convict": "0.2.3",
-    "express": "3.2.5"
+    "express": "3.2.5",
+    "underscore": "~1.4.4",
+    "async": "~0.2.9"
   },
   "devDependencies": {
     "awsbox": "0.4.5"

@@ -6,5 +6,6 @@
   "librato": {
     "user": "<your librato username>",
     "token": "<your librato api token>"
-  }
+  },
+  "statsNamespace": "MozIDP"
 }
